@@ -1,0 +1,12 @@
+#lang datalog
+(my-function).
+parent(john,douglas).
+parent(bob, john).
+parent(ebbon, bob).
+
+ancestor(A,B) :- parent(A,B).
+ancestor(ebbon, B) :-
+    parent(ebbon, C),
+    ancestor(C, B),
+    X :- my-function(B).
+    

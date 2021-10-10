@@ -1,7 +1,5 @@
 #lang racket
 
-(provide switch)
-
 (define-syntax (switch stx)
   (define (transform-clause cl)
     (syntax-case cl (default)
@@ -22,3 +20,11 @@
     ((_ x clause ...)
      (with-syntax (((case-clause ...) (transform-clauses #'(clause ...))))
        #'(case x case-clause ...)))))
+
+
+(define (combined-simple-test k)
+  (switch k
+    ["m" (println "m")]
+    ["up" (println "up")]
+    [default (println "DEFAULT")]
+    ))

@@ -1,5 +1,4 @@
-#lang racket
-
+#lang racket/gui
 (provide switch)
 
 (define-syntax (switch stx)
@@ -22,3 +21,24 @@
     ((_ x clause ...)
      (with-syntax (((case-clause ...) (transform-clauses #'(clause ...))))
        #'(case x case-clause ...)))))
+
+(define (simple-test k)
+  (switch k
+    ["m" (println "m")]
+    ["up" (println "up")]
+    [default (println "DEFAULT")]
+    ))
+
+(define (expand-simple-test)
+  (expand-once '(switch k
+                        ["m" (println "m")]
+                        ["up" (println "up")]
+                        [default (println "DEFAULT")]
+                        )))
+
+(define (e1)
+  (expand-once '(switch k
+                 ["a" (println "a")]
+                 ["b" (println "b")]
+                 [default (println "DEFAULT")]))
+  )
